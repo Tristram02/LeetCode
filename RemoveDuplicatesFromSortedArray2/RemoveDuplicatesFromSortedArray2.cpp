@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
 class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
