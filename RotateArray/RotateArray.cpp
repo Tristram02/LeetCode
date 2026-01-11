@@ -82,14 +82,38 @@ public:
             nums[size - i - 1] = tmp;
         }
     }
+
+    // Time complexity O(n)
+    // Space complexity O(1)
+    void rotate_v3(std::vector<int>& nums, int k) 
+    {
+        auto n = nums.size();
+        k %= n;
+
+        auto count = 0;
+        for (int start = 0; count < n; start++) 
+        {
+            auto current = start;
+            auto prev = nums[start];
+
+            do {
+                auto next = (current + k) % n;
+                auto temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+    }
 };
 
 int main()
 {
     Solution s = Solution();
     auto nums = std::vector<int>{1,2,3,4,5,6,7};
-    int k = 4;
-    s.rotate_v2(nums, k);
+    int k = 3;
+    s.rotate_v3(nums, k);
 
     for (auto& x : nums)
     {
