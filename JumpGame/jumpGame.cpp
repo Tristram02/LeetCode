@@ -38,13 +38,43 @@ public:
         auto n = nums.size();
         return 1 == jump(nums, 0, n-1, -1);
     }
+
+    bool canJump_v2(std::vector<int> nums)
+    {
+        auto n = nums.size();
+        if (n <= 1)
+        {
+            return true;
+        }
+        auto farthest = nums[0];
+
+        for (int i = 1; i <= farthest; i++)
+        {
+            if (i + nums[i] > farthest)
+            {
+                farthest = i + nums[i];
+            }
+
+            if (farthest >= n - 1)
+            {
+                return true;
+            }
+        }
+        
+        if (farthest < n - 1)
+        {
+            return false;
+        }
+        
+        return true;
+    }
 };
 
 int main()
 {
     auto s = Solution();
     auto nums = std::vector<int>{2,2,0,0,4};
-    if (s.canJump(nums))
+    if (s.canJump_v2(nums))
     {
         std::cout << "You can!" << std::endl;
     }
