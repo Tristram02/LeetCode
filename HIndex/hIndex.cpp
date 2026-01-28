@@ -7,7 +7,6 @@ public:
         auto buckets = std::vector<int>(1001, 0);
         auto n = citations.size();
         auto maxCitation = 0;
-        auto hIndex = n;
         for (int i = 0; i < n; i++)
         {
             buckets[citations[i]]++;
@@ -16,34 +15,36 @@ public:
                 maxCitation = citations[i];
             }
         }
-
-        for (int i = 0; i <= maxCitation; i++)
+        auto sum = 0;
+        for (int i = maxCitation; i >= 0; i--)
         {
-            if (hIndex > i)
-            {
-                if (buckets[i] == hIndex)
-                {
-                    hIndex = i;
-                }
-                else
-                {
-                    hIndex -= buckets[i];
-                }
-            }
-            if (hIndex < i)
+            if (i < 0)
             {
                 break;
             }
+            sum += buckets[i];
+            if (sum >= i)
+            {
+                return i;
+            }
+            else if (sum == n)
+            {
+                if (i >= n)
+                {
+                    return n;
+                }
+                return i;
+            }
         }
         
-        return hIndex;
+        return 0;
     }
 };
 
 int main()
 {
     auto s = Solution();
-    auto citations = std::vector<int>{2,3,2};
+    auto citations = std::vector<int>{3,0,6,1,5};
     std::cout << s.hIndex(citations) << std::endl;
     return 0;
 }
