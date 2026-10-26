@@ -11,21 +11,21 @@ public:
         {
             return false;
         }
+        if (x < 10)
+        {
+            return true;
+        }
+        if (x % 10 == 0)
+        {
+            return false;
+        }
+
         uint32_t rev = 0;
-        auto y = x;
-        while (x)
+        while (x > rev)
         {
             rev = rev * 10 + x % 10;
             x /= 10;
         }
-
-        if (rev == y)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return rev == x or x == rev / 10;
     }
 };
