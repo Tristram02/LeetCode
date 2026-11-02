@@ -36,4 +36,29 @@ public:
 
         return bits.to_ulong();
     }
+
+    int reverseBitsBO(int n) // BO -> Bit operation
+    {
+        int result = 0;
+
+        for (int i = 0; i < 32; i++)
+        {
+            result <<= 1;
+            result |= (n&1);
+            n >>= 1;
+        }
+
+        return result;
+    }
+
+    int reverseBitsMask(int n)
+    {
+        n = (n >> 16) | (n << 16);
+        n = ((n & 0xFF00FF00) >> 8) | ((n & 0x00FF00FF) << 8);
+        n = ((n & 0xF0F0F0F0) >> 4) | ((n & 0x0F0F0F0F) << 4);
+        n = ((n & 0xCCCCCCCC) >> 2) | ((n & 0x33333333) << 2);
+        n = ((n & 0xAAAAAAAA) >> 1) | ((n & 0x55555555) << 1);
+
+        return n;
+    }
 };
